@@ -7,6 +7,7 @@ const server = http.createServer(app);
 const { Server } = require('socket.io');
 
 let users = {};
+let messages = [];
 const io = new Server(server);
 
 
@@ -51,7 +52,11 @@ io.on('connection', (socket)=>{
       socket.emit('newusr', users[k])
     };  
     
-
+    
+    for (let k in messages){
+      
+      socket.emit('message', messages[k]);
+    };
     
     me = user;
 		me.id = crypto.createHash('md5').update(user.mail)
@@ -60,6 +65,7 @@ io.on('connection', (socket)=>{
     io.sockets.emit('newusr', me);
     users[me.mail] = me;
     socket.emit('logged', me);
+    
     //console.log(users);
   }
 
@@ -77,7 +83,7 @@ io.on('connection', (socket)=>{
       delete users[me.mail];
       io.sockets.emit('discusr', me);
     }
-    console.log(users)
+    //console.log(users)
   }
   
   
@@ -98,8 +104,9 @@ io.on('connection', (socket)=>{
       
     }
     //console.log(message);
+    messages.push(message);
     io.sockets.emit('message', message);
-    console.log(message);
+    
   })
 
   

@@ -41,11 +41,23 @@ function sendForm1(ev){ // form event listener
 
 
 
-  
+  var msgtpl = $('#msgtpl').html();
+    $('#msgtpl').remove();
+    const m = document.getElementById("messages");
+    socket.on('message', (message1)=>{
+      console.log(message1);
+      m.innerHTML+='<div class="sep"></div>';
+
+     
+      console.log(message1);
+      m.innerHTML += '<div class="message">' + Mustache.render(msgtpl, message1) + '</div>';
+    });
 
   socket.on('logged', (users1)=>{
     //console.log(users1);
     $('#login').fadeOut();
+    //var lastmsg= false;
+    
   });
 
   socket.on('discusr', (user)=>{
@@ -79,11 +91,10 @@ function sendForm1(ev){ // form event listener
   );
     const m = document.getElementById("messages");
     socket.on('message', (message1)=>{
-      
       m.innerHTML+='<div class="sep"></div>';
-        
+
      
-      console.log(message1);
+      //console.log(message1);
       m.innerHTML += '<div class="message">' + Mustache.render(msgtpl, message1) + '</div>';
     });
     //message.value = '';
