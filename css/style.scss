@@ -1,0 +1,159 @@
+@import "compass";
+@import "animate";
+
+@include global-reset;
+
+$default-animation-duration:1s;
+$default-transition-duration:0.3s;
+$default-animation-fill-mode:'both';
+
+body{
+	font-family: arial, sans-serif;
+	font-size: 16px;
+	font-style: normal;
+	background:url(wood.jpg) center top repeat;
+	color:#4e4e4e;
+}
+
+#users{
+	position: fixed;
+	top:0; left:0; bottom:0;
+	background:url(bg.png);
+	width: 65px;
+	@include box-shadow(0px 0px 30px rgba(0,0,0,1) inset);
+	img{
+		display: block;
+		margin: 5px;
+		position: relative;
+		@include animation-name('fadeInUp');
+		@include animation-duration;
+		@include box-shadow(0px 0px 10px #000 inset, 0px 1px 0px rgba(255,255,255,0.1));
+		@include border-radius(3px);
+	}
+}
+
+#form{
+	position: fixed;
+	left:65px; right:0; bottom:0;
+	background:#d2d2d2;
+	height: 50px;
+	.text{
+		padding: 0 5px;
+		border:solid 1px #d2d2d2;
+		height: 50px - 18px;
+		position: fixed;
+		bottom:9px; left:65 + 9px; right:9px;
+		@include border-radius(3px);
+		@include box-shadow(0px 1px 3px #d2d2d2 inset);
+	}
+	.submit{
+		position: fixed;
+		height: 50px - 18px;
+		bottom:9px; right:9px;
+		cursor: pointer;
+	}
+}
+
+#messages{
+	position: fixed;
+	top:0; left:65px; right:0px; bottom:30px;
+	overflow: scroll;
+	padding: 10px;
+	.message{
+		display: block;
+		position: relative;
+		background-color: #FFF;
+		border-bottom: 1px solid #d2d2d2;
+		padding: 10px;
+		z-index: 20;
+		@include animation-name('fadeInRight');
+		@include animation-duration(0.4s);
+		&:after{
+			content:''; position: absolute;
+			bottom:-3px; left:0; right:0;
+			background-color: #FFF;
+			height: 1px;
+			z-index: 10;
+			border-bottom: 1px solid #d2d2d2;
+		}
+		&:before{
+			content:''; position: absolute;
+			bottom:-5px; left:0; right:0;
+			background-color: #FFF;
+			height: 1px;
+			z-index: 10;
+			border-bottom: 1px solid #d2d2d2;
+		}
+	}
+	img{
+		position: absolute;
+		display: block;
+		@include border-radius(6px);
+		@include box-shadow(0px 0px 10px rgba(0,0,0,1) inset);
+	}
+	.info{
+		margin-left: 65px;
+	}
+	strong{
+		font-weight: bold;
+		color:#4e4e4e;
+		font-size: 14px;
+	}
+	p{
+		margin-bottom: 10px;
+		font-size: 14px;
+	}
+	.date{
+		font-size: 12px;
+		color:#ababab;
+		position: absolute;
+		top:10px; right:10px;
+	}
+	.sep{
+		height: 20px;
+	}
+}
+#msgtpl{
+	display: none;
+}
+
+#login{
+	background-color: rgba(0,0,0,0.8);
+	position: fixed;
+	top:0; left:0; right:0; bottom:0;
+	z-index: 2000;
+	#loginform{
+		position: absolute;
+		left:0; right:0;
+		top:50%; margin-top: -55px;
+		text-align: center;
+		input{
+			color:#FFF;
+			border: 1px solid rgba(0,0,0,0.4);
+			background-color: rgba(0,0,0,0.4);
+			height: 30px;
+			outline:none;
+			padding: 0 5px;
+			@include border-radius(6px);
+			@include box-shadow(0px 1px 0px rgba(255,255,255,0.1));
+			&::-webkit-input-placeholder{
+				color:rgba(255,255,255,0.4);
+				@include transition-duration;
+			}
+			&:focus::-webkit-input-placeholder{ @include opacity(0);}
+		}
+	}
+	h1{
+		font-size: 50px;
+		color:#FFF;
+	}
+	p{
+		color:#FFF;
+		font-size: 16px;
+		padding: 20px;
+		@include opacity(0.7);
+	}
+}
+
+@include animate-fadeInUp(false);
+@include animate-fadeInRight(false);
